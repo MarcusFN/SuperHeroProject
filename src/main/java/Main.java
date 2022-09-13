@@ -9,7 +9,7 @@ public class Main {
         int menuValg;
 
         do {
-            System.out.println("Velkommen Superhero universet!\n1. Opret superhelt\n9. Afslut program");
+            System.out.println("Velkommen Superhero universet!\n1. Opret superhelt\n2. Vis Superhelte liste\n9. Afslut program");
             menuValg = scanner.nextInt();
             scanner.nextLine();
 
@@ -34,9 +34,11 @@ public class Main {
 
             } else if (menuValg == 9) {
                 System.out.println("program afsluttes");
-            } else {
+            } else if (menuValg ==2){
+                System.out.println(database.showListSuperheroes());
+            }else {
                 System.out.println("ugyldigt input");
             }
-        }while(menuValg==1);
+        }while(menuValg== 1 || menuValg == 2);
     }
 }

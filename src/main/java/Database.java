@@ -12,9 +12,17 @@ public class Database {
     }
 
 
+public boolean showListSuperheroes(){
+        for (Superhero superhero : superheroes){
+            System.out.println("----------------\n"
+                    + "Superheltenavn: " + superhero.getHeroName()+ "\n"
+                    + "Superkraft: " + superhero.getHeroPowers()+ "\n"
+                    + "Virkelige navn: " + superhero.getHeroRealName()+ "\n"
+                    + "Oprindelsesår: " + superhero.getHeroCreation()+ "\n"
+                    + "Er menneske: " + superhero.getHeroHuman()+ "\n"
+                    + "Styrke: " + superhero.getHeroPowerLevel());
 
-
-
-
-
+        }
+    return showListSuperheroes();
+    }
 }
