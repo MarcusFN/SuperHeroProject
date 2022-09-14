@@ -2,8 +2,6 @@ import java.util.ArrayList;
 
 public class Database {
 
-
-
     private ArrayList<Superhero>superheroes = new ArrayList<>();
 
     public void createSuperHero(String heroName, String heroRealName, boolean isHuman, String heroPowers, int heroCreation, double heroPowerLevel) {
@@ -15,6 +13,15 @@ public class Database {
 public ArrayList<Superhero> getSuperheroesList(){
         return superheroes;
 }
+    public Superhero searchFor(String searchTerm){
+        for (Superhero superhero : superheroes){
+            String name = superhero.getHeroName().toLowerCase();
+            if (name.contains(searchTerm.toLowerCase())) {
+                return superhero;
+            }
+            }
+            return null;
+        }
 
+    }
 
-}

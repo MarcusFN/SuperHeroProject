@@ -9,7 +9,7 @@ public class Main {
         int menuValg;
 
         do {
-            System.out.println("\nVelkommen Superhero universet!\n1. Opret superhelt\n2. Vis Superhelte liste\n9. Afslut program");
+            System.out.println("\nVelkommen Superhero universet!\n1. Opret superhelt\n2. Vis Superhelte liste\n3. Søg efter superhelt\n9. Afslut program");
             menuValg = scanner.nextInt();
             scanner.nextLine();
 
@@ -21,9 +21,9 @@ public class Main {
                 System.out.println("indtast om din superhelt er et menneske (j/n):");
                 char SuperHeltMenneske = scanner.next().charAt(0);
                 boolean isHuman = false;
-                if (SuperHeltMenneske == 'j'){
+                if (SuperHeltMenneske == 'j') {
                     isHuman = true;
-                } else if( SuperHeltMenneske == 'n'){
+                } else if (SuperHeltMenneske == 'n') {
                     isHuman = false;
                 }
                 scanner.nextLine();
@@ -40,11 +40,11 @@ public class Main {
 
             } else if (menuValg == 9) {
                 System.out.println("program afsluttes");
-            } else if (menuValg == 2){
+            } else if (menuValg == 2) {
                 System.out.println("Liste af superhelte:");
                 for (Superhero superheroList : database.getSuperheroesList()) {
                     System.out.println("----------------\n"
-                            + "Superheltenavn: " + superheroList.getHeroName() + "\n"
+                            + "Superhelte navn: " + superheroList.getHeroName() + "\n"
                             + "Superkraft: " + superheroList.getHeroPowers() + "\n"
                             + "Virkelige navn: " + superheroList.getHeroRealName() + "\n"
                             + "Oprindelsesår: " + superheroList.getHeroCreation() + "\n"
@@ -52,9 +52,25 @@ public class Main {
                             + "Styrke: " + superheroList.getHeroPowerLevel());
 
                 }
-            } else {
-                System.out.println("ugyldigt input");
-            }
+            } else if (menuValg == 3) {
+                System.out.println("----------------\nIndtast søgeord: ");
+                String searchTerm = scanner.nextLine();
+                Superhero superheroList = database.searchFor(searchTerm);
+
+
+                if (superheroList == null) {
+                    System.out.println("superhelt ikke fundet");
+                } else {
+                        System.out.println("----------------\n"
+                                + "Superhelte navn: " + superheroList.getHeroName() + "\n"
+                                + "Superkraft: " + superheroList.getHeroPowers() + "\n"
+                                + "Virkelige navn: " + superheroList.getHeroRealName() + "\n"
+                                + "Oprindelsesår: " + superheroList.getHeroCreation() + "\n"
+                                + "Er menneske: " + superheroList.getHuman() + "\n"
+                                + "Styrke: " + superheroList.getHeroPowerLevel());
+                    }
+                }
+
         }while(menuValg == 1 || menuValg == 2);
 
 
