@@ -71,7 +71,7 @@ public class Main {
                     }
                 }
 
-        }while(menuValg == 1 || menuValg == 2);
+        }while(menuValg == 1 || menuValg == 2 || menuValg == 3);
 
 
 
