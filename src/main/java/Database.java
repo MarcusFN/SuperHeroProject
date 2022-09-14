@@ -12,17 +12,8 @@ public class Database {
     }
 
 
-public void showListSuperheroes() {
-    for (Superhero superhero : superheroes) {
-        System.out.println("----------------\n"
-                + "Superheltenavn: " + superhero.getHeroName() + "\n"
-                + "Superkraft: " + superhero.getHeroPowers() + "\n"
-                + "Virkelige navn: " + superhero.getHeroRealName() + "\n"
-                + "Oprindelsesår: " + superhero.getHeroCreation() + "\n"
-                + "Er menneske: " + superhero.getHuman() + "\n"
-                + "Styrke: " + superhero.getHeroPowerLevel());
-
-    }
+public ArrayList<Superhero> getSuperheroesList(){
+        return superheroes;
 }
 
 

@@ -36,9 +36,9 @@ public class Superhero {
         return heroPowerLevel;
     }
 
-
     public void setSuperhelteNavn() {
         this.heroName = heroName;
     }
+
 
 }
