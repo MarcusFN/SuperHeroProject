@@ -18,9 +18,15 @@ public class Main {
                 String SuperHelteNavn = scanner.nextLine();
                 System.out.println("indtast det rigtige navn på " + SuperHelteNavn + ":");
                 String SuperHelterigtigeNavn = scanner.nextLine();
-                // skal have det her til at virke med boolean
-                System.out.println("indtast om din superhelt er et menneske (true/false):");
-                boolean SuperHeltMenneske = scanner.nextBoolean();
+                // skal have det til at hedde ja og nej i stedet for true og false
+                System.out.println("indtast om din superhelt er et menneske (j/n):");
+                char SuperHeltMenneske = scanner.next().charAt(0);
+                boolean erMenneske = false;
+                if (SuperHeltMenneske == 'j'){
+                    erMenneske = true;
+                } else if( SuperHeltMenneske == 'n'){
+                    erMenneske = false;
+                }
                 scanner.nextLine();
                 System.out.println("indtast hvilke superkrafter " + SuperHelteNavn + " har:");
                 String SuperHelteKrafter = scanner.nextLine();
@@ -28,17 +34,20 @@ public class Main {
                 int SuperHelteAlder = scanner.nextInt();
                 System.out.println("indtast hvilke styrke din superhelt har (0-100):");
                 int SuperhelteStyrke = scanner.nextInt();
+                database.createSuperHero(SuperHelteNavn, SuperHelterigtigeNavn, erMenneske, SuperHelteKrafter, SuperHelteAlder, SuperhelteStyrke);
 
                 System.out.println("Din Superhelt!\nSuperhelte Navn: " + SuperHelteNavn + "\nRigtige navn: " + SuperHelterigtigeNavn + "\nmenneske: " + SuperHeltMenneske + "\nKrafter: " + SuperHelteKrafter + "\nOpstandelse: " + SuperHelteAlder + "\nStyrke: " + SuperhelteStyrke);
 
 
             } else if (menuValg == 9) {
                 System.out.println("program afsluttes");
-            } else if (menuValg ==2){
-                System.out.println(database.showListSuperheroes());
-            }else {
+            } else if (menuValg == 2){
+                System.out.println("Liste af superhelte:");
+                database.showListSuperheroes();
+
+            } else {
                 System.out.println("ugyldigt input");
             }
-        }while(menuValg== 1 || menuValg == 2);
+        }while(menuValg == 1 || menuValg == 2);
     }
 }

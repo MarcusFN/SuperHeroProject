@@ -1,7 +1,7 @@
 public class Superhero {
     private String heroName;
     private String heroRealName;
-    private boolean heroHuman;
+    private boolean isHuman;
     private String heroPowers;
     private int heroCreation;
     private double heroPowerLevel;
@@ -10,7 +10,7 @@ public class Superhero {
     public Superhero(String superHeroName, String reelName, boolean isHuman, String superPower, int creationYear, double powerLevel) {
         this.heroName = superHeroName;
         this.heroRealName = reelName;
-        this.heroHuman = isHuman;
+        this.isHuman = isHuman;
         this.heroPowers = superPower;
         this.heroCreation = creationYear;
         this.heroPowerLevel = powerLevel;
@@ -23,8 +23,8 @@ public class Superhero {
     public String getHeroRealName() {
         return heroRealName;
     }
-    public boolean getHeroHuman() {
-        return heroHuman;
+    public boolean getHuman() {
+        return isHuman;
     }
     public String getHeroPowers() {
         return heroPowers;
