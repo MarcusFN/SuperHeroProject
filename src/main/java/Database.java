@@ -14,7 +14,7 @@ public class Database {
         return superheroes;
     }
 
-    public Superhero searchFor(String searchTerm) {
+    public Superhero searchSuperhero(String searchTerm) {
         for (Superhero superhero : superheroes) {
             String name = superhero.getHeroName().toLowerCase();
             if (name.contains(searchTerm.toLowerCase())) {
@@ -22,7 +22,7 @@ public class Database {
             } else {
                 System.out.println("intet resultat fundet");
             }
-            return null;
+
         }
 
         return null;
