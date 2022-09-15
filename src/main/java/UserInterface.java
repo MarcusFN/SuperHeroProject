@@ -2,15 +2,20 @@ import java.util.Scanner;
 
 public class UserInterface {
 
+    Scanner scanner = new Scanner(System.in);
+    Database database = new Database();
+    int menuValg;
+
+    public void menu(){
+        System.out.println("\nVelkommen Superhero universet!\n1. Opret superhelt\n2. Vis Superhelte liste\n3. Søg efter superhelt\n9. Afslut program");
+        menuValg = scanner.nextInt();
+        scanner.nextLine();
+    }
+
     public void startProgram(){
-        Scanner scanner = new Scanner(System.in);
-        Database database = new Database();
-        int menuValg;
 
         do {
-            System.out.println("\nVelkommen Superhero universet!\n1. Opret superhelt\n2. Vis Superhelte liste\n3. Søg efter superhelt\n9. Afslut program");
-            menuValg = scanner.nextInt();
-            scanner.nextLine();
+            menu();
 
             if (menuValg == 1) {
                 System.out.println("indtast navnet på din superhelt:");
@@ -26,6 +31,7 @@ public class UserInterface {
                     isHuman = false;
                 }
                 scanner.nextLine();
+
                 System.out.println("indtast hvilke superkrafter " + heroName + " har:");
                 String HeroPowers = scanner.nextLine();
                 System.out.println("indtast hvilket år din superhelte opstod:");
@@ -35,7 +41,6 @@ public class UserInterface {
                 database.createSuperHero(heroName, heroRealName, isHuman, HeroPowers, heroCreation, heroPowerLevel);
 
                 System.out.println("Din Superhelt!\nSuperhelte Navn: " + heroName + "\nRigtige navn: " + heroRealName + "\nmenneske: " + SuperHeltMenneske + "\nKrafter: " + HeroPowers + "\nOpstandelse: " + heroCreation + "\nStyrke: " + heroPowerLevel);
-
 
             } else if (menuValg == 9) {
                 System.out.println("program afsluttes");

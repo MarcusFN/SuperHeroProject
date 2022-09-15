@@ -9,7 +9,6 @@ public class Database {
         superheroes.add(newSuperHero);
     }
 
-
     public ArrayList<Superhero> getSuperheroesList() {
         return superheroes;
     }
