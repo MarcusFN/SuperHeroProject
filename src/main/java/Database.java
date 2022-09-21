@@ -1,6 +1,14 @@
 import java.util.ArrayList;
 
 public class Database {
+    //testdata
+    public void testData() {
+        createSuperHero("Batman", "Bruce Wayne", true, "Rig", 2001, 50);
+        createSuperHero("Iron Man", "Tony Stark", true, "Flyve", 1998, 40);
+        createSuperHero("Black Panther", "ved ikke", true, "Rig", 2001, 30);
+        createSuperHero("Superman", "ved ikke", true, "Rig", 2001, 45);
+        createSuperHero("Running man", "ved ikke", true, "Rig", 2001, 99);
+    }
 
     private ArrayList<Superhero> superheroes = new ArrayList<>();
 
@@ -9,21 +17,18 @@ public class Database {
         superheroes.add(newSuperHero);
     }
 
+    //getter til superhero ArrayList
     public ArrayList<Superhero> getSuperheroesList() {
         return superheroes;
     }
 
-    public Superhero searchSuperhero(String searchTerm) {
-        for (Superhero superhero : superheroes) {
-            String name = superhero.getHeroName().toLowerCase();
-            if (name.contains(searchTerm.toLowerCase())) {
-                return superhero;
-            } else {
-                System.out.println("intet resultat fundet");
+    public ArrayList<Superhero> findSuperhero(String searchTerm) {
+        ArrayList<Superhero> searchResult = new ArrayList<Superhero>();
+        for (Superhero hero : superheroes) {
+            if (hero.getHeroName().contains(searchTerm)) {
+                searchResult.add(hero);
             }
-
         }
-
-        return null;
+        return searchResult;
     }
 }
