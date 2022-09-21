@@ -57,12 +57,12 @@ public class Superhero {
     }
 
     // setter nyt
-    public void setHeroCreation(String editedHeroCreation) {
-        this.heroCreation = Integer.parseInt(editedHeroCreation);
+    public void setHeroCreation(int editedHeroCreation) {
+        this.heroCreation = editedHeroCreation;
     }
     // setter nyt
-    public void setHeroPowerLevel(String editedHeroPowerLevel) {
-        this.heroPowerLevel = Integer.parseInt(editedHeroPowerLevel);
+    public void setHeroPowerLevel(double editedHeroPowerLevel) {
+        this.heroPowerLevel = editedHeroPowerLevel;
     }
 
 
