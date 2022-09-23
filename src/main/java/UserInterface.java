@@ -18,6 +18,7 @@ public class UserInterface {
                     "2. Vis Superhelte liste\n" +
                     "3. Søg efter superhelt\n" +
                     "4. Edit superhelte\n" +
+                    "5. delete superhero\n" +
                     "9. Afslut program");
 
             do {
@@ -35,13 +36,15 @@ public class UserInterface {
 
     public void startProgram(int menuValg) {
         if (menuValg == 1) {
-            this.createSuperhero();
+            createSuperhero();
         } else if (menuValg == 2) {
             showListOfSuperHeroes();
         } else if (menuValg == 3) {
             searchSuperhero();
         } else if (menuValg == 4) {
             editSuperheroes();
+        } else if (menuValg == 5) {
+            deleteSuperhero();
         } else if (menuValg == 9) {
             System.out.println("program afsluttes");
         }
@@ -93,155 +96,178 @@ public class UserInterface {
         String searchTerm = scanner.nextLine();
 
         for (Superhero superhero : database.findSuperhero(searchTerm)) {
-            System.out.println("----------------\n"
-                    + "Superhelte navn: " + superhero.getHeroName() + "\n"
-                    + "Rigtige navn navn: " + superhero.getHeroRealName() + "\n"
-                    + "Superkraft: " + superhero.getHeroPowers() + "\n"
-                    + "Oprindelsesår: " + superhero.getHeroCreation() + "\n"
-                    + "Er menneske: " + superhero.getHuman() + "\n"
-                    + "Styrke: " + superhero.getHeroPowerLevel());
+            name = superhero.getHeroName().toLowerCase();
+            if (name.contains(searchTerm.toLowerCase())) {
+                System.out.println("----------------\n"
+                        + "Superhelte navn: " + superhero.getHeroName() + "\n"
+                        + "Rigtige navn navn: " + superhero.getHeroRealName() + "\n"
+                        + "Superkraft: " + superhero.getHeroPowers() + "\n"
+                        + "Oprindelsesår: " + superhero.getHeroCreation() + "\n"
+                        + "Er menneske: " + superhero.getHuman() + "\n"
+                        + "Styrke: " + superhero.getHeroPowerLevel());
 
-            //tilføjer searchTerm fra input til database til søgning
+                //tilføjer searchTerm fra input til database til søgning
 
+
+            }
+
+        }
+    }
+
+    public void editSuperheroes () {
+            System.out.println("indtast navnet på den superhelt du ønsker at redigere: ");
+            System.out.println("---------------------------");
+            String searchTermEdit = scanner.nextLine();
+            ArrayList<Superhero> seachEditResult = new ArrayList<>();
+
+            int index = 1;
+
+            for (Superhero searchResult : database.findSuperhero(searchTermEdit)) {
+                name = searchResult.getHeroName().toLowerCase();
+                if (name.contains(searchTermEdit.toLowerCase())) {
+                    seachEditResult.add(searchResult);
+                    System.out.println(index++ + " " + searchResult.getHeroName());
+                }
+            }
+
+            System.out.print("Indtast nummeret på den superhero du vil redigere: ");
+            String userEditNumberString = scanner.nextLine();
+            int userEditNumberInteger = Integer.parseInt(userEditNumberString);
+
+
+            Superhero editSuperhero = seachEditResult.get(userEditNumberInteger - 1);
+            System.out.println("Du ønsker at redigere: " + editSuperhero.getHeroName());
+            System.out.println("---------------------------");
+            System.out.println("Ønsker du ikke redigere tryk ENTER for at fortsætte ");
+
+
+            do {
+                System.out.println("Superhero navn er nu " + editSuperhero.getHeroName());
+
+                try {
+                    System.out.println("indskriv rettelse her: ");
+                    String editedSuperheroName = scanner.nextLine().trim();
+                    if (!editedSuperheroName.isEmpty()) {
+                        editSuperhero.setHeroName(editedSuperheroName);
+                    }
+                    userValgFalse = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("indskriv din rettelse her eller klik kun enter hvis intet skal ændres: ");
+                }
+
+            } while (userValgFalse == false);
+
+            do {
+                System.out.println("Superhero rigtige navn er nu: " + editSuperhero.getHeroRealName());
+
+                try {
+                    System.out.println("indskriv rettelse her: ");
+                    String editedSuperheroRealName = scanner.nextLine().trim();
+                    if (!editedSuperheroRealName.isEmpty()) {
+                        editSuperhero.setHeroRealName(editedSuperheroRealName);
+                    }
+                    userValgFalse = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("indskriv din rettelse her eller klik kun enter hvis intet skal ændres: ");
+                }
+
+            } while (userValgFalse == false);
+
+            do {
+                System.out.println("Superhero superkrafter: " + editSuperhero.getHeroPowers());
+
+                try {
+                    System.out.println("indskriv rettelse her: ");
+                    String editedSuperheroPowers = scanner.nextLine().trim();
+                    if (!editedSuperheroPowers.isEmpty()) {
+                        editSuperhero.setHeroPowers(editedSuperheroPowers);
+                    }
+                    userValgFalse = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("indskriv din rettelse her eller klik kun enter hvis intet skal ændres: ");
+                }
+
+            } while (userValgFalse == false);
+
+            do {
+                System.out.println("Superhero oprindelsesår: " + editSuperhero.getHeroCreation());
+
+                try {
+                    System.out.println("indskriv rettelse her: ");
+                    String editedSuperheroCreation = scanner.nextLine().trim();
+                    if (!editedSuperheroCreation.isEmpty()) {
+                        editSuperhero.setHeroCreation(Integer.parseInt(editedSuperheroCreation));
+                    }
+                    userValgFalse = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("indskriv din rettelse her eller klik kun enter hvis intet skal ændres: ");
+                }
+
+            } while (userValgFalse == false);
+
+            do {
+                System.out.println("Er superhero menneske svar (j/n)" + editSuperhero.getHuman());
+
+                try {
+                    System.out.println("indskriv rettelse her: ");
+                    String editedSuperheroHuman = scanner.nextLine().trim();
+                    if (!editedSuperheroHuman.isEmpty()) {
+                        editSuperhero.setHuman(Boolean.parseBoolean(editedSuperheroHuman));
+                    }
+                    userValgFalse = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("indskriv din rettelse her eller klik kun enter hvis intet skal ændres: ");
+                }
+
+            } while (userValgFalse == false);
+
+            do {
+                System.out.println("Superhero styrke: " + editSuperhero.getHeroPowerLevel());
+
+                try {
+                    System.out.println("indskriv rettelse her: ");
+                    String editedHeroPowerLevel = scanner.nextLine().trim();
+
+
+                    if (!editedHeroPowerLevel.isEmpty()) {
+                        editSuperhero.setHeroPowerLevel(Double.parseDouble(editedHeroPowerLevel));
+                    }
+                    userValgFalse = true;
+                } catch (NumberFormatException e) {
+                    System.out.println("indskriv din rettelse her eller klik kun enter hvis intet skal ændres: ");
+                }
+
+            } while (userValgFalse == false);
 
         }
 
-    }
+        public void deleteSuperhero () {
+            System.out.println("indtast navnet på den superhelt du ønsker at slette: ");
+            System.out.println("---------------------------");
 
-    public void editSuperheroes() {
-        System.out.println("indtast den superhelt som du vil redigere: ");
-        String searchTermEdit = scanner.nextLine();
-        ArrayList<Superhero> seachEditResult = new ArrayList<>();
 
-        int index = 1;
+            String searchTermDelete = scanner.nextLine();
+            ArrayList<Superhero> searchDeleteEdit = new ArrayList<>();
 
-        for (Superhero searchResult : database.findSuperhero(searchTermEdit)) {
-            name = searchResult.getHeroName().toLowerCase();
-            if (name.contains(searchTermEdit.toLowerCase())) {
-                seachEditResult.add(searchResult);
-                System.out.println(index++ + " " + searchResult.getHeroName());
+            int index = 1;
+
+            for (Superhero deleteSuperhero : database.getSuperheroesList()) {
+                name = deleteSuperhero.getHeroName().toLowerCase();
+                if (name.contains(searchTermDelete.toLowerCase())) {
+                    searchDeleteEdit.add(deleteSuperhero);
+                    System.out.println(index++ + ":" + deleteSuperhero.getHeroName());
+                }
             }
+
+            System.out.print("Indtast nummeret på den superhero du ønsker at slette: ");
+            String deleteNumberString = scanner.nextLine();
+            int deleteNumberInt = Integer.parseInt(deleteNumberString);
+
+
+            Superhero deleteSuperhero = searchDeleteEdit.get(deleteNumberInt - 1);
+            database.deleteSuperhero(deleteSuperhero);
+            System.out.println("du har nu slettet " + deleteSuperhero.getHeroName());
+
         }
 
-        System.out.print("Indtast nummeret på den superhero du vil redigere: ");
-        String userEditNumberString = scanner.nextLine();
-        int userEditNumberInteger = Integer.parseInt(userEditNumberString);
-
-
-        Superhero editSuperhero = seachEditResult.get(index - 1);
-        System.out.println("Redigere: " + editSuperhero);
-        System.out.println("Ønsker du ikke redigere tryk ENTER for at fortsætte!");
-
-        do {
-            System.out.println("Indtast nummer på den superhelt du vil redigere: ");
-
-            try {
-                int intSuperheroEdit;
-                String newPowerLevel = this.scanner.nextLine();
-                intSuperheroEdit = Integer.parseInt(newPowerLevel);
-                userValgFalse = true;
-            } catch (NumberFormatException var12) {
-                System.out.println("Indtast venligst gyldigt input ");
-            }
-
-        } while (userValgFalse == false);
-
-        do {
-            System.out.println("Superhero navn " + editSuperhero.getHeroName());
-
-            try {
-                System.out.println("indskriv rettelse her: ");
-                String editedSuperheroName = scanner.nextLine();
-                if (!editedSuperheroName.isEmpty()) {
-                    editSuperhero.setHeroName(editedSuperheroName);
-                }
-                userValgFalse = true;
-            } catch (NumberFormatException var11) {
-                System.out.println("indskriv din rettelse her eller klik kun enter hvis intet skal ændres: ");
-            }
-
-        } while (userValgFalse == false);
-
-        do {
-            System.out.println("Superhero rigtige navn " + editSuperhero.getHeroRealName());
-
-            try {
-                System.out.println("indskriv rettelse her: ");
-                String editedSuperheroRealName = scanner.nextLine();
-                if (!editedSuperheroRealName.isEmpty()) {
-                    editSuperhero.setHeroRealName(editedSuperheroRealName);
-                }
-                userValgFalse = true;
-            } catch (NumberFormatException var10) {
-                System.out.println("indskriv din rettelse her eller klik kun enter hvis intet skal ændres: ");
-            }
-
-        } while (userValgFalse == false);
-
-        do {
-            System.out.println("Superhero superkraft " + editSuperhero.getHeroPowers());
-
-            try {
-                System.out.println("indskriv rettelse her: ");
-                String editedSuperheroPowers = scanner.nextLine();
-                if (!editedSuperheroPowers.isEmpty()) {
-                    editSuperhero.setHeroPowers(editedSuperheroPowers);
-                }
-                userValgFalse = true;
-            } catch (NumberFormatException var9) {
-                System.out.println("indskriv din rettelse her eller klik kun enter hvis intet skal ændres: ");
-            }
-
-        } while (userValgFalse == false);
-
-        do {
-            System.out.println("Superhero oprindelsesår " + editSuperhero.getHeroCreation());
-
-            try {
-                System.out.println("indskriv rettelse her: ");
-                String editedSuperheroCreation = scanner.nextLine();
-                if (!editedSuperheroCreation.isEmpty()) {
-                    editSuperhero.setHeroCreation(editedSuperheroCreation);
-                }
-                userValgFalse = true;
-            } catch (NumberFormatException var8) {
-                System.out.println("indskriv din rettelse her eller klik kun enter hvis intet skal ændres: ");
-            }
-
-        } while (userValgFalse == false);
-
-        do {
-            System.out.println("Er superhero menneske svar (j/n)" + editSuperhero.getHuman());
-
-            try {
-                System.out.println("indskriv rettelse her: ");
-                String editedSuperheroHuman = scanner.nextLine();
-                if (!editedSuperheroHuman.isEmpty()) {
-                    editSuperhero.setHuman(Boolean.parseBoolean(editedSuperheroHuman));
-                }
-                userValgFalse = true;
-            } catch (NumberFormatException var7) {
-                System.out.println("indskriv din rettelse her eller klik kun enter hvis intet skal ændres: ");
-            }
-
-        } while (userValgFalse == false);
-
-        do {
-            System.out.println("Superhero styrke " + editSuperhero.getHeroPowerLevel());
-
-            try {
-                System.out.println("indskriv rettelse her: ");
-                String editedHeroPowerLevel = scanner.nextLine();
-                if (!editedHeroPowerLevel.isEmpty()) {
-                    editSuperhero.setHeroPowerLevel(editedHeroPowerLevel);
-                }
-                userValgFalse = true;
-            } catch (NumberFormatException var6) {
-                System.out.println("indskriv din rettelse her eller klik kun enter hvis intet skal ændres: ");
-            }
-
-        } while (userValgFalse == false);
-
-    }
 }
-
